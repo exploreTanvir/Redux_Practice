@@ -36,3 +36,4 @@ Store.subscribe(()=>{
     console.log(Store.getState())
 })
 Store.dispatch(add_user("Raju"))
+Store.dispatch(add_user("Raju,korim,Rohim"))
