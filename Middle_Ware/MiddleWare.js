@@ -1,7 +1,9 @@
-const {createStore}=require("redux")
+const {createStore,applyMiddleware}=require("redux")
+const { default: logger } = require("redux-logger")
 // State
 const userState={
-    user:["Tanvir"]
+    user:["Tanvir"],
+    count:1
 }
 
 // constant
@@ -20,7 +22,8 @@ const userReduce=((State=userState,action)=>{
     switch (action.type) {
         case addUser:
             return {
-                user:[...State.user,action.payload]
+                user:[...State.user,action.payload],
+                count: State.count+1
             }
             break;
     
@@ -31,7 +34,7 @@ const userReduce=((State=userState,action)=>{
 
 // Store
 
-const Store=createStore(userReduce)
+const Store=createStore(userReduce,applyMiddleware(logger))
 Store.subscribe(()=>{
     console.log(Store.getState())
 })
